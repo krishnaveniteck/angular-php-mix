@@ -1,0 +1,13 @@
+.DS_STORE
+
+# Angular related packages
+dist/
+bazel-out
+integration/bazel/bazel-*
+e2e_tests.*
+node_modules
+tools/gulp-tasks/cldr/cldr-data/
+
+# Ignore IDE related packages
+.idea/
+.vscode/
