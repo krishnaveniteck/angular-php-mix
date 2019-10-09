@@ -15,8 +15,7 @@ if ($result = mysqli_query($con, $sql)) {
     }
 
     echo json_encode(['data' => $cars]);
-}
-else {
+} else {
     http_response_code(404);
 }
 
