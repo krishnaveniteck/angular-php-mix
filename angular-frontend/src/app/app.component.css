@@ -1,0 +1,16 @@
+.btn-success {
+    background: #32a858;
+}
+
+.btn-denial {
+    background: #a8323c;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.helper-text {
+    font-size: 12px;
+    color: #a8323c;
+}

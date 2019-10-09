@@ -1,20 +1,53 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+<div *ngIf="error" class="alert alert-danger" role="alert">{{error}}</div>
+<div *ngIf="success" class="alert alert-success">{{success}}</div>
+
+<div id="theList" class ="row">
+  <div class="col s3 offset-s4">
+    <h2 class="center">List of Items</h2>
+    <div *ngFor="let item of cars;let i = index;" class="list-group-item row">
+      <div class="col s3">
+        <input type="text" class="form-control" [(ngModel)]="cars[i].model" pattern="^[a-zA-Z]+$"
+               #model="ngModel" [ngClass]="{ 'is-invalid': model.touched && model.invalid }" required>
+      </div>
+      <div class="col s3">
+        <input type="number" class="form-control" [(ngModel)]="cars[i].price" #price="ngModel"
+               [ngClass]="{ 'is-invalid': price.touched && price.invalid }" required>
+      </div>
+      <div class="col s5">
+        <input type="button" class="btn btn-success" value="Update" [disabled]="model.invalid || price.invalid"
+               (click)="updateCar(model, price, item.id); openToast('update')">
+        &nbsp;
+        <input type="button" class="btn right btn-denial" value="Delete" (click)="deleteCar(item.id); openToast('delete')">
+      </div>
+    </div>
+  </div>
 </div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+
+<div id="theForm" class="row">
+    <div class="col s3 offset-s4">
+        <h2 class="center">The form</h2>
+        <form #f="ngForm" name="theForm" (submit)="addCar(f)">
+          <div class="form-group">
+            <input type="text" class="form-control" name="model" [(ngModel)]="car.model" placeholder="model"
+                   #carModel="ngModel" pattern="^[a-zA-Z]+$" required>
+            <span class="helper-text" *ngIf="carModel.errors?.required && carModel.touched">
+              The model name is required
+            </span>
+            <span class="helper-text" *ngIf="carModel.errors?.pattern && carModel.touched">
+              The model name can only contain the letters a-z or A-Z
+            </span>
+          </div>
+
+          <div class="form-group">
+            <input type="number" class="form-control" name="price" [(ngModel)]="car.price" placeholder="price"
+                   #carPrice="ngModel" required>
+            <span class="helper-text" *ngIf="carPrice.errors?.required && carPrice.touched">
+              The price is required
+            </span>
+          </div>
+
+          <button class="btn btn-success full-width" [disabled]="f.invalid">Add</button>
+        </form>
+  </div>
+</div>
 
