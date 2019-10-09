@@ -4,7 +4,7 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^([^\.]+)$ $1.php [NC,L]
 
 # Headers für API
-Header always set Access-Control-Allow-Origin http://localhost:4200
-Header always set Access-Control-Max-Age "1000"
-Header always set Access-Control-Allow-Headers "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding"
-Header always set Access-Control-Allow-Mehods "POST, GET, OPTIONS, DELETE, PUT"
+Header add Access-Control-Allow-Origin http://localhost:4200
+Header add Access-Control-Max-Age "1000"
+Header add Access-Control-Allow-Headers "X-Requested-With, Content-Type, Origin, Authorization, Accept, Client-Security-Token, Accept-Encoding"
+Header add Access-Control-Allow-Methods "POST, GET, OPTIONS, DELETE, PUT"
